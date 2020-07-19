@@ -8,7 +8,9 @@ class HeaderComponent extends Component {
     super();
     this.state = {
       isLoggedIn: AuthSession.handleIsLoggedIn(),
-      username: "",
+      username: AuthSession.handleIsLoggedIn()
+        ? AuthSession.handleGetUser().username
+        : "",
     };
   }
 
