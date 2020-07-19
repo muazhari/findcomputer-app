@@ -26,8 +26,9 @@ class LoginPage extends Component {
 
         const { id, username, email, password } = res.data;
         AuthSession.handleLoginSucceed({ id, username, email, password });
-        // this.props.history.push("/home");
-        window.open(`/home`, "_self");
+        this.forceUpdate();
+        this.props.history.replace("/home");
+        // window.open(`/home`, "_self");
       })
       .catch((err) => {
         this.setState({ error: true });

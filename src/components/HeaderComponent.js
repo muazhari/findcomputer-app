@@ -7,7 +7,7 @@ class HeaderComponent extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: AuthSession.handleIsLoggedIn(),
       username: "",
     };
   }
@@ -28,7 +28,9 @@ class HeaderComponent extends Component {
       isLoggedIn: AuthSession.handleIsLoggedIn(),
       username: "",
     });
-    window.open(`/logout`, "_self");
+    this.props.history.replace("/logout");
+    this.forceUpdate();
+    // window.open(`/logout`, "_self");
   };
 
   handleMyShop = () => {
@@ -52,7 +54,7 @@ class HeaderComponent extends Component {
               <Link to={isLoggedIn ? `/home` : "/auth"}>Find Computer</Link>
             </div>
             <ul className="navbar-nav">
-              {isLoggedIn && (
+              {true && (
                 <>
                   <li className="nav-link">
                     <Link to="/home">Home</Link>
