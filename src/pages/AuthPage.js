@@ -1,22 +1,39 @@
 import React, { Component } from "react";
 
-import Layout from "../components/Layout";
-
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  handleRegister = () => {
+    this.props.history.push("/auth/register");
+  };
+
+  handleLogin = () => {
+    this.props.history.push("/auth/login");
+  };
+
   render() {
     return (
-      // <Layout className="auth page">
-      <Layout>
-        <h1>Hi from the second page</h1>
-        <p>Welcome to page 2</p>
-        <link to="/">Go back to the homepage</link>
-      </Layout>
-      // </Layout>
+      <div className="auth page">
+        <div className="container m">
+          <button
+            className="btn btn-outline-primary m-md-5"
+            onClick={() => this.handleRegister()}
+          >
+            Register
+          </button>
+        </div>
+        <div className="container">
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => this.handleLogin()}
+          >
+            Login
+          </button>
+        </div>
+      </div>
     );
   }
 }
