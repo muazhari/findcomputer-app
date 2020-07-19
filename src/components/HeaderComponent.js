@@ -35,6 +35,10 @@ class HeaderComponent extends Component {
     // window.open(`/logout`, "_self");
   };
 
+  handleAuthenticate = () => {
+    this.forceUpdate();
+  };
+
   handleMyShop = () => {
     const { id, username, password } = AuthSession.handleGetUser();
     this.props.history.push(`/shops/${username}`);
@@ -73,7 +77,9 @@ class HeaderComponent extends Component {
             <ul className="navbar-nav navbar-collapse justify-content-end">
               {!isLoggedIn && (
                 <li className="nav-link">
-                  <Link to="/auth">Authenticate</Link>
+                  <Link onClick={() => this.handleAuthenticate()} to="/auth">
+                    Authenticate
+                  </Link>
                 </li>
               )}
               {isLoggedIn && (
