@@ -24,7 +24,7 @@ class ShopUpdateFormComponent extends Component {
         >
           {(props) => (
             <Form>
-              <div className="container display-flex flex-1-row">
+              <div className="container display-flex flex-1-row  ">
                 <div className="container display-flex">
                   <ErrorMessage
                     name="name"

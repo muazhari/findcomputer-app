@@ -2,7 +2,8 @@ import Axios from "axios";
 import AuthSession from "../services/AuthSession";
 
 class SearchService {
-  apiURL = "http://localhost:3000/api/v1";
+  // apiURL = "http://localhost:3000/api/v1";
+  apiURL = process.env.API_URL;
 
   getAllItem() {
     const { id, username, password } = AuthSession.handleGetUser();

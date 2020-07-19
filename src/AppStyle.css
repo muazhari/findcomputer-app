@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  /* flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center; */
 }
 
 .App-logo {
@@ -51,13 +56,6 @@ body {
   font-weight: normal;
   /* font-family: "proxima_novaregular", sans-serif; */
   /* overflow-y: scroll; */
-}
-
-.screen.root {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
 }
 
 a {

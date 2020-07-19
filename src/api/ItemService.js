@@ -2,7 +2,8 @@ import Axios from "axios";
 import AuthSession from "../services/AuthSession";
 
 class ItemService {
-  apiURL = "http://localhost:3000/api/v1";
+  // apiURL = "http://localhost:3000/api/v1";
+  apiURL = process.env.API_URL;
 
   getAll() {
     const { id, username, password } = AuthSession.handleGetUser();

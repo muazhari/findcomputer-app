@@ -13,6 +13,7 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false,
       itemValues: {
         id: "",
         username: "",
@@ -27,11 +28,14 @@ class ProfilePage extends Component {
   }
 
   handleItemFetch = () => {
-    const { username } = AuthSession.handleGetUser();
-    UserService.getByUsername({ username })
+    const { username: currentUsername } = AuthSession.handleGetUser();
+    UserService.getByUsername({ username: currentUsername })
       .then((res) => {
         console.log(res);
+
         this.setState({ itemValues: res.data });
+        const { id, username, email, password } = res.data;
+        AuthSession.handleLoginSucceed({ id, username, email, password });
       })
       .catch((err) => {
         console.log(err);
@@ -46,11 +50,13 @@ class ProfilePage extends Component {
     UserService.update({ userToUpdate })
       .then((res) => {
         console.log(res);
+        if (res.status !== 200) return null;
+
         this.handleItemFetch();
-        AuthSession.handleLoginSucceed({ userToUpdate });
       })
       .catch((err) => {
         console.log(err);
+        this.setState({ error: true });
       });
   };
 
@@ -72,7 +78,7 @@ class ProfilePage extends Component {
   };
 
   render() {
-    const { itemData, itemValues } = this.state;
+    const { itemData, itemValues, error } = this.state;
     const { id, username, email, password } = itemValues;
     return (
       <div className="container">
@@ -81,6 +87,12 @@ class ProfilePage extends Component {
         <div className="container mb-5">
           <ProfileUpdateItemComponent initialValues={itemValues} />
         </div>
+
+        {error && (
+          <div className="container alert alert-danger">
+            Invalid credentials
+          </div>
+        )}
 
         <h2 className="text-center mb-3">Update Profile</h2>
         <ProfileUpdateFormComponent

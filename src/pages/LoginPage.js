@@ -14,17 +14,18 @@ class LoginPage extends Component {
   }
 
   handleSubmit = (val) => {
-    const { username, password } = val;
+    const { username: currentUsername, password: currentPassword } = val;
 
-    AuthService.handleLogin({ username, password })
+    AuthService.handleLogin({
+      username: currentUsername,
+      password: currentPassword,
+    })
       .then((res) => {
         console.log(res);
-        if (res.status !== 200) {
-          return null;
-        }
+        if (res.status !== 200) return null;
 
-        const { id } = res.data;
-        AuthSession.handleLoginSucceed({ id, username, password });
+        const { id, username, email, password } = res.data;
+        AuthSession.handleLoginSucceed({ id, username, email, password });
         // this.props.history.push("/home");
         window.open(`/home`, "_self");
       })
