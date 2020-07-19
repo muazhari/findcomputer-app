@@ -36,12 +36,12 @@ class HeaderComponent extends Component {
   };
 
   handleMyShop = () => {
-    const { username, isLoggedIn } = this.state;
+    const { id, username, password } = AuthSession.handleGetUser();
     this.props.history.push(`/shops/${username}`);
   };
 
   handleProfile = () => {
-    const { username, isLoggedIn } = this.state;
+    const { id, username, password } = AuthSession.handleGetUser();
     this.props.history.push(`/profile/${username}`);
   };
 
