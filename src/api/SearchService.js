@@ -3,7 +3,7 @@ import AuthSession from "../services/AuthSession";
 
 class SearchService {
   // apiURL = "http://localhost:3000/api/v1";
-  apiURL = process.env.API_URL;
+  apiURL = process.env.REACT_APP_API_URL;
 
   getAllItem() {
     const { id, username, password } = AuthSession.handleGetUser();
@@ -12,6 +12,7 @@ class SearchService {
 
   getAllItemWithUsername() {
     const { id, username, password } = AuthSession.handleGetUser();
+    console.log(this.apiURL);
     return Axios.get(`${this.apiURL}/items/with/username`);
   }
 
