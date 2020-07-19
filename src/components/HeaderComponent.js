@@ -10,7 +10,7 @@ class HeaderComponent extends Component {
       isLoggedIn: AuthSession.handleIsLoggedIn(),
       username: AuthSession.handleIsLoggedIn()
         ? AuthSession.handleGetUser().username
-        : "",
+        : null,
     };
   }
 
