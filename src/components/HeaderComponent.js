@@ -16,7 +16,7 @@ class HeaderComponent extends Component {
 
   componentDidMount() {
     if (AuthSession.handleIsLoggedIn()) {
-      const { id, username, password } = AuthSession.handleGetUser();
+      const { username } = AuthSession.handleGetUser();
       this.setState({
         isLoggedIn: true,
         username,
