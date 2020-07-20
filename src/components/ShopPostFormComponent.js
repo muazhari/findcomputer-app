@@ -16,6 +16,7 @@ class ShopPostFormComponent extends Component {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validate={handleValidate}
+          enableReinitialize
         >
           {(props) => (
             <Form>
