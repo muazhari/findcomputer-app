@@ -16,6 +16,7 @@ class ProfileUpdateFormComponent extends Component {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validate={handleValidate}
+          enableReinitialize
         >
           {(props) => (
             <Form>
