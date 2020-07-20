@@ -6,33 +6,12 @@ import AuthSession from "../services/AuthSession";
 class HeaderComponent extends Component {
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: AuthSession.handleIsLoggedIn(),
-      username: AuthSession.handleIsLoggedIn()
-        ? AuthSession.handleGetUser().username
-        : "",
-    };
-  }
-
-  componentDidMount() {
-    if (AuthSession.handleIsLoggedIn()) {
-      const { username } = AuthSession.handleGetUser();
-      this.setState({
-        isLoggedIn: true,
-        username,
-      });
-    }
+    this.state = {};
   }
 
   handleLogout = () => {
     AuthSession.handleLogoutSucceed();
-    this.setState({
-      isLoggedIn: AuthSession.handleIsLoggedIn(),
-      username: "",
-    });
     this.props.history.replace("/logout");
-    this.forceUpdate();
-    // window.open(`/logout`, "_self");
   };
 
   handleAuthenticate = () => {
@@ -50,7 +29,7 @@ class HeaderComponent extends Component {
   };
 
   render() {
-    const { username, isLoggedIn } = this.state;
+    const isLoggedIn = AuthSession.handleIsLoggedIn();
 
     return (
       <div className="component header mb-5">
@@ -60,10 +39,10 @@ class HeaderComponent extends Component {
               <Link to={isLoggedIn ? `/home` : "/auth"}>Find Computer</Link>
             </div>
             <ul className="navbar-nav">
-              {true && (
+              {isLoggedIn && (
                 <>
                   <li className="nav-link">
-                    <Link to="/home">Home</Link>
+                    <Link onClick={() => this.handleHome()>Home</Link>
                   </li>
                   <li className="nav-link">
                     <Link onClick={() => this.handleMyShop()}>My Shop</Link>
