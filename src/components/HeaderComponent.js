@@ -28,6 +28,11 @@ class HeaderComponent extends Component {
     this.props.history.push(`/profile/${username}`);
   };
 
+  handleHome = () => {
+    const { id, username, password } = AuthSession.handleGetUser();
+    this.props.history.push(`/home`);
+  };
+
   render() {
     const isLoggedIn = AuthSession.handleIsLoggedIn();
 
@@ -42,7 +47,7 @@ class HeaderComponent extends Component {
               {isLoggedIn && (
                 <>
                   <li className="nav-link">
-                    <Link onClick={() => this.handleHome()>Home</Link>
+                    <Link onClick={() => this.handleHome()}>Home</Link>
                   </li>
                   <li className="nav-link">
                     <Link onClick={() => this.handleMyShop()}>My Shop</Link>
