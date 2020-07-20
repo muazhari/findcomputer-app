@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AuthSession from "../services/AuthSession";
 
 class SearchItemsComponents extends Component {
   constructor(props) {
@@ -8,12 +9,13 @@ class SearchItemsComponents extends Component {
 
   render() {
     const { data, handleItemBuy } = this.props;
+    const { username } = AuthSession.handleGetUser();
     return (
       <div className="container">
         <table className="table">
           <thead>
             <tr>
-              <th>Username</th>
+              <th>Owner</th>
               <th>Name</th>
               <th>Description</th>
               <th>Category</th>
@@ -30,13 +32,15 @@ class SearchItemsComponents extends Component {
                 <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td>
-                  <button
-                    onClick={() => handleItemBuy(item.id)}
-                    type="button"
-                    className="btn btn-outline-primary"
-                  >
-                    Buy
-                  </button>
+                  {item.username !== username ? (
+                    <button
+                      onClick={() => handleItemBuy(item.id)}
+                      type="button"
+                      className="btn btn-outline-primary"
+                    >
+                      Buy
+                    </button>
+                  ) : null}
                 </td>
               </tr>
             ))}

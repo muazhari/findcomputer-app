@@ -42,8 +42,7 @@ export default class HomePage extends Component {
 
         const foundItems = [];
         res.data.forEach((item, i) => {
-          if (isStringIn(keywords, item) && item.username !== username)
-            foundItems.push(item);
+          if (isStringIn(keywords, item)) foundItems.push(item);
         });
 
         this.setState({ foundItems });
