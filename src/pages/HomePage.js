@@ -12,12 +12,12 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       keywords: "",
-      foundItems: [],
+      itemFound: [],
     };
   }
 
   componentDidMount() {
-    const { keywords, foundItems } = this.state;
+    const { keywords, itemFound } = this.state;
     this.handleSearchFetch(keywords);
   }
 
@@ -35,17 +35,19 @@ export default class HomePage extends Component {
   };
 
   handleSearchFetch = (keywords) => {
-    const { username } = AuthSession.handleGetUser();
+    const { username: currentUsername } = AuthSession.handleGetUser();
     SearchService.getAllItemWithUsername()
       .then((res) => {
         console.log(res);
 
-        const foundItems = [];
+        const itemFound = [];
         res.data.forEach((item, i) => {
-          if (isStringIn(keywords, item)) foundItems.push(item);
+          const { username, name, description, category, price } = item;
+          const itemFilter = { username, name, description, category, price };
+          if (isStringIn(keywords, itemFilter)) itemFound.push(item);
         });
 
-        this.setState({ foundItems });
+        this.setState({ itemFound });
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +61,7 @@ export default class HomePage extends Component {
   };
 
   handleItemBuy = (itemId) => {
-    const { keywords, foundItems } = this.state;
+    const { keywords, itemFound } = this.state;
     ItemService.deleteById({ itemId })
       .catch((res) => {
         console.log(res);
@@ -73,7 +75,7 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { keywords, foundItems } = this.state;
+    const { keywords, itemFound } = this.state;
     return (
       <div className="home page container">
         <h1 className="mb-5">Home page</h1>
@@ -85,9 +87,9 @@ export default class HomePage extends Component {
             handleValidation={this.handleSearchValidation}
           />
         </div>
-        {foundItems.length > 0 && (
+        {itemFound.length > 0 && (
           <SearchItemsComponent
-            data={foundItems}
+            data={itemFound}
             handleItemBuy={this.handleItemBuy}
           />
         )}

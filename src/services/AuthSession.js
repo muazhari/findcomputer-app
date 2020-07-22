@@ -1,4 +1,6 @@
-class AuthService {
+import AuthService from "../api/AuthService";
+
+class AuthSession {
   handleLoginSucceed(credentials) {
     sessionStorage.setItem("authenticatedUser", JSON.stringify(credentials));
   }
@@ -26,4 +28,4 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+export default new AuthSession();

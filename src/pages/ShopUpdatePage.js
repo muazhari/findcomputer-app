@@ -55,6 +55,7 @@ class ShopUpdatePage extends Component {
       .then((res) => {
         console.log(res);
         this.handleItemFetch();
+        // this.props.history.goBack();
       })
       .catch((err) => {
         console.log(err);
@@ -75,6 +76,27 @@ class ShopUpdatePage extends Component {
       });
   };
 
+  handleValidate = (val) => {
+    const error = {};
+    if (!val.name) {
+      error.name = "Enter a name";
+    }
+
+    if (!val.description) {
+      error.description = "Enter a description";
+    }
+
+    if (!val.category) {
+      error.category = "Enter a category";
+    }
+
+    if (!val.price) {
+      error.price = "Enter a price";
+    }
+
+    return error;
+  };
+
   render() {
     const { itemData, itemValues } = this.state;
     const { id, name, description, category, price } = itemValues;
@@ -82,9 +104,7 @@ class ShopUpdatePage extends Component {
       <div className="container">
         <h1 className="text-center mb-5">My Shop Update</h1>
 
-        <div className="container mb-4">
-          <ShopUpdateItemComponent initialValues={itemValues} />
-        </div>
+        <ShopUpdateItemComponent initialValues={itemValues} />
 
         <ShopUpdateFormComponent
           initialValues={itemValues}

@@ -11,7 +11,7 @@ class ShopPostFormComponent extends Component {
     const { initialValues, handleValidate, handleSubmit } = this.props;
 
     return (
-      <div className="container display-flex w-50 flex-1-row">
+      <div className="container w-75">
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -20,8 +20,8 @@ class ShopPostFormComponent extends Component {
         >
           {(props) => (
             <Form>
-              <div className="container display-flex flex-1-row">
-                <div className="container display-flex">
+              <div className="container d-md-flex">
+                <div className="container">
                   <ErrorMessage
                     name="name"
                     component="div"
@@ -53,7 +53,7 @@ class ShopPostFormComponent extends Component {
                   </fieldset>
                 </div>
 
-                <div className="container display-flex">
+                <div className="container">
                   <ErrorMessage
                     name="category"
                     component="div"

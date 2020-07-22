@@ -19,6 +19,7 @@ export default class HomePage extends Component {
       <div className="auth page">
         <div className="container m">
           <button
+            type="button"
             className="btn btn-outline-primary m-md-5"
             onClick={() => this.handleRegister()}
           >
@@ -27,6 +28,7 @@ export default class HomePage extends Component {
         </div>
         <div className="container">
           <button
+            type="button"
             className="btn btn-outline-primary"
             onClick={() => this.handleLogin()}
           >

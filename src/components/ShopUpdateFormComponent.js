@@ -16,7 +16,7 @@ class ShopUpdateFormComponent extends Component {
     } = this.props;
 
     return (
-      <div className="container display-flex w-50 flex-1-row">
+      <div className="container w-75">
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -25,8 +25,8 @@ class ShopUpdateFormComponent extends Component {
         >
           {(props) => (
             <Form>
-              <div className="container display-flex flex-1-row  ">
-                <div className="container display-flex">
+              <div className="container d-md-flex">
+                <div className="container ">
                   <ErrorMessage
                     name="name"
                     component="div"

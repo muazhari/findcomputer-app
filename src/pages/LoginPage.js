@@ -7,9 +7,8 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      error: false,
+      authValues: { username: "", password: "" },
+      isError: false,
     };
   }
 
@@ -31,7 +30,7 @@ class LoginPage extends Component {
         // window.open(`/home`, "_self");
       })
       .catch((err) => {
-        this.setState({ error: true });
+        this.setState({ isError: true });
         console.log(err);
       });
   };
@@ -50,18 +49,18 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { username, password, error } = this.state;
+    const { authValues, isError } = this.state;
     return (
       <div className="container">
         <h1 className="mb-5">Login Page</h1>
         <div className="container display-flex w-25">
-          {error && (
+          {isError && (
             <div className="container alert alert-danger">
               Invalid credentials
             </div>
           )}
           <Formik
-            initialValues={{ username, password }}
+            initialValues={authValues}
             onSubmit={this.handleSubmit}
             validate={this.handleValidate}
           >

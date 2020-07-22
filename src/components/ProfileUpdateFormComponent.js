@@ -11,7 +11,7 @@ class ProfileUpdateFormComponent extends Component {
     const { initialValues, handleValidate, handleSubmit } = this.props;
 
     return (
-      <div className="container display-flex w-50 flex-1-row">
+      <div className="container">
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -20,57 +20,52 @@ class ProfileUpdateFormComponent extends Component {
         >
           {(props) => (
             <Form>
-              <div className="container display-flex flex-1-row">
-                <div className="container display-flex">
-                  <ErrorMessage
+              <div className="container w-50 d-md-flex flex-md-column">
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className="alert alert-warning"
+                />
+                <fieldset className="my-3">
+                  <label htmlFor="username">Username</label>
+                  <Field
+                    id="username"
                     name="username"
-                    component="div"
-                    className="alert alert-warning"
+                    type="text"
+                    className="form-control"
                   />
-                  <fieldset className="mb-4">
-                    <label htmlFor="username">Username</label>
-                    <Field
-                      id="username"
-                      name="username"
-                      type="text"
-                      className="form-control"
-                    />
-                  </fieldset>
+                </fieldset>
 
-                  <ErrorMessage
-                    name="description"
-                    component="div"
-                    className="alert alert-warning"
+                <ErrorMessage
+                  name="description"
+                  component="div"
+                  className="alert alert-warning"
+                />
+                <fieldset className="my-3">
+                  <label htmlFor="email">Email</label>
+                  <Field
+                    id="email"
+                    name="email"
+                    type="text"
+                    className="form-control"
                   />
-                  <fieldset className="mb-4">
-                    <label htmlFor="password">Email</label>
-                    <Field
-                      id="email"
-                      name="email"
-                      type="text"
-                      className="form-control"
-                    />
-                  </fieldset>
-                </div>
-
-                <div className="container display-flex">
-                  <ErrorMessage
+                </fieldset>
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="alert alert-warning"
+                />
+                <fieldset className="my-3">
+                  <label htmlFor="password">Password</label>
+                  <Field
+                    id="password"
                     name="password"
-                    component="div"
-                    className="alert alert-warning"
+                    type="text"
+                    className="form-control"
                   />
-                  <fieldset className="mb-4">
-                    <label htmlFor="password">Password</label>
-                    <Field
-                      id="password"
-                      name="password"
-                      type="text"
-                      className="form-control"
-                    />
-                  </fieldset>
-                </div>
+                </fieldset>
               </div>
-              <button type="submit" className="btn btn-outline-primary mb-4">
+              <button type="submit" className="btn btn-outline-primary my-4">
                 Save
               </button>
             </Form>
