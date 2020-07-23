@@ -17,16 +17,16 @@ export default class HomePage extends Component {
   render() {
     return (
       <div className="auth page">
-        <div className="container m">
+        <div className="container m-5">
           <button
             type="button"
-            className="btn btn-outline-primary m-md-5"
+            className="btn btn-outline-primary"
             onClick={() => this.handleRegister()}
           >
             Register
           </button>
         </div>
-        <div className="container">
+        <div className="container m-5">
           <button
             type="button"
             className="btn btn-outline-primary"

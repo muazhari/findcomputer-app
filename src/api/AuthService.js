@@ -9,14 +9,6 @@ class AuthService {
 
   password = process.env.REACT_APP_AUTH_HEADER_PASSWORD;
 
-  handleBasicAuthentication(username, password) {
-    return Axios.get(`${this.apiURL}/basicauth`, {
-      headers: {
-        authorization: this.createBasicAuthToken(username, password),
-      },
-    });
-  }
-
   createBasicAuthToken(username, password) {
     return `Basic ${window.btoa(`${username}:${password}`)}`;
   }
