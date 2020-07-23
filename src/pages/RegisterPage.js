@@ -6,15 +6,16 @@ class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      email: "",
-      password: "",
+      authValues: { username: "", email: "", password: "" },
+      isLoading: false,
     };
   }
 
   handleSubmit = (val) => {
-    const { username, email, password } = val;
+    const { authValues } = val;
+    const { username, email, password } = authValues;
 
+    this.setState({ isLoading: true });
     AuthService.handleRegister({ username, email, password })
       .then((res) => {
         this.props.history.replace("/auth/login");
@@ -22,6 +23,9 @@ class RegisterPage extends Component {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
       });
   };
 
@@ -43,13 +47,17 @@ class RegisterPage extends Component {
   };
 
   render() {
-    const { username, email, password } = this.state;
+    const { authValues, isLoading } = this.state;
     return (
       <div className="container">
         <h1 className="mb-5">Register Page</h1>
         <div className="container display-flex w-25">
+          {isLoading && (
+            <div className="container alert alert-info">Loading</div>
+          )}
+
           <Formik
-            initialValues={{ username, email, password }}
+            initialValues={authValues}
             onSubmit={this.handleSubmit}
             validate={this.handleValidate}
           >

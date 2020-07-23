@@ -20,6 +20,7 @@ class ProfilePage extends Component {
         email: "",
         password: "",
       },
+      isLoading: false,
     };
   }
 
@@ -47,6 +48,7 @@ class ProfilePage extends Component {
     const { username, email, password } = val;
     const userToUpdate = { username, email, password };
 
+    this.setState({ isLoading: true });
     UserService.update({ userToUpdate })
       .then((res) => {
         console.log(res);
@@ -57,6 +59,9 @@ class ProfilePage extends Component {
       .catch((err) => {
         console.log(err);
         this.setState({ error: true });
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
       });
   };
 
@@ -78,7 +83,7 @@ class ProfilePage extends Component {
   };
 
   render() {
-    const { itemData, itemValues, error } = this.state;
+    const { itemData, itemValues, error, isLoading } = this.state;
     const { id, username, email, password } = itemValues;
     return (
       <div className="container">
@@ -93,6 +98,8 @@ class ProfilePage extends Component {
             Invalid credentials
           </div>
         )}
+
+        {isLoading && <div className="container alert alert-info">Loading</div>}
 
         <h2 className="text-center mb-3">Update Profile</h2>
         <ProfileUpdateFormComponent

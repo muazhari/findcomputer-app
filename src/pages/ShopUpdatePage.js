@@ -19,6 +19,7 @@ class ShopUpdatePage extends Component {
         category: "",
         price: "",
       },
+      isLoading: false,
     };
   }
 
@@ -50,7 +51,7 @@ class ShopUpdatePage extends Component {
     const { match } = this.props;
     const { name, description, category, price } = val;
     const itemToUpdate = { name, description, category, price };
-
+    this.setState({ isLoading: true });
     ItemService.updateById({ itemId: match.params.itemId, itemToUpdate })
       .then((res) => {
         console.log(res);
@@ -59,6 +60,9 @@ class ShopUpdatePage extends Component {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
       });
   };
 
@@ -98,14 +102,14 @@ class ShopUpdatePage extends Component {
   };
 
   render() {
-    const { itemData, itemValues } = this.state;
+    const { itemData, itemValues, isLoading } = this.state;
     const { id, name, description, category, price } = itemValues;
     return (
       <div className="container">
         <h1 className="text-center mb-5">My Shop Update</h1>
 
         <ShopUpdateItemComponent initialValues={itemValues} />
-
+        {isLoading && <div className="container alert alert-info">Loading</div>}
         <ShopUpdateFormComponent
           initialValues={itemValues}
           handleSubmit={this.handleSubmit}

@@ -18,6 +18,7 @@ class ShopPostPage extends Component {
         category: "",
         price: "",
       },
+      isLoading: false,
     };
   }
 
@@ -49,7 +50,7 @@ class ShopPostPage extends Component {
     const { match } = this.props;
     const { name, description, category, price } = val;
     const itemToCreate = { name, description, category, price };
-
+    this.setState({ isLoading: true });
     ItemService.create({ itemToCreate })
       .then((res) => {
         console.log(res);
@@ -58,6 +59,9 @@ class ShopPostPage extends Component {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
       });
   };
 
@@ -76,12 +80,13 @@ class ShopPostPage extends Component {
   };
 
   render() {
-    const { itemData, itemValues } = this.state;
+    const { itemData, itemValues, isLoading } = this.state;
     const { id, name, description, category, price } = itemValues;
     return (
       <div className="container">
         <h1 className="text-center mb-5">My Shop Post</h1>
 
+        {isLoading && <div className="container alert alert-info">Loading</div>}
         <ShopPostFormComponent
           initialValues={itemValues}
           handleSubmit={this.handleSubmit}

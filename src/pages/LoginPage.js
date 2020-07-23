@@ -9,11 +9,14 @@ class LoginPage extends Component {
     this.state = {
       authValues: { username: "", password: "" },
       isError: false,
+      isLoading: false,
     };
   }
 
   handleSubmit = (val) => {
     const { username: currentUsername, password: currentPassword } = val;
+
+    this.setState({ isLoading: true });
 
     AuthService.handleLogin({
       username: currentUsername,
@@ -32,6 +35,9 @@ class LoginPage extends Component {
       .catch((err) => {
         this.setState({ isError: true });
         console.log(err);
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
       });
   };
 
@@ -49,16 +55,21 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { authValues, isError } = this.state;
+    const { authValues, isError, isLoading } = this.state;
     return (
       <div className="container">
         <h1 className="mb-5">Login Page</h1>
-        <div className="container display-flex w-25">
+        <div className="container display-flex w-50">
           {isError && (
             <div className="container alert alert-danger">
               Invalid credentials
             </div>
           )}
+
+          {isLoading && (
+            <div className="container alert alert-info">Loading</div>
+          )}
+
           <Formik
             initialValues={authValues}
             onSubmit={this.handleSubmit}
