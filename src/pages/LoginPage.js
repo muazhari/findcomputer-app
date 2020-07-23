@@ -59,7 +59,7 @@ class LoginPage extends Component {
     return (
       <div className="container">
         <h1 className="mb-5">Login Page</h1>
-        <div className="container display-flex w-50">
+        <div className="container d-md-flex justify-content-center w-50">
           {isError && (
             <div className="container alert alert-danger">
               Invalid credentials
