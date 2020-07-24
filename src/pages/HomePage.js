@@ -44,8 +44,6 @@ export default class HomePage extends Component {
     const { parameter } = this.state.itemFilter;
     SearchService.getAllItemWithUsername()
       .then((res) => {
-        console.log(res);
-
         const itemFound = [];
         res.data.forEach((item, i) => {
           const itemFilteredByParameter = Object.keys(item)
