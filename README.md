@@ -21,6 +21,8 @@ Terdapat beberapa fitur dalam projek ini
 3. Search items by specific parameter
 4. Profile management
 
+# Framework
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
