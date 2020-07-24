@@ -5,6 +5,8 @@ import { isStringIn } from "../tools/validations";
 import SearchService from "../api/SearchService";
 import SearchComponent from "../components/SearchComponent";
 import SearchItemsComponent from "../components/SearchItemsComponent";
+import SearchFilterComponent from "../components/SearchFilterComponent";
+
 import AuthSession from "../services/AuthSession";
 
 export default class HomePage extends Component {
@@ -13,6 +15,9 @@ export default class HomePage extends Component {
     this.state = {
       keywords: "",
       itemFound: [],
+      itemFilter: {
+        parameter: ["username", "name", "description", "category", "price"],
+      },
     };
   }
 
@@ -36,15 +41,20 @@ export default class HomePage extends Component {
 
   handleSearchFetch = (keywords) => {
     const { username: currentUsername } = AuthSession.handleGetUser();
+    const { parameter } = this.state.itemFilter;
     SearchService.getAllItemWithUsername()
       .then((res) => {
         console.log(res);
 
         const itemFound = [];
         res.data.forEach((item, i) => {
-          const { username, name, description, category, price } = item;
-          const itemFilter = { username, name, description, category, price };
-          if (isStringIn(keywords, itemFilter)) itemFound.push(item);
+          const itemFilteredByParameter = Object.keys(item)
+            .filter((key) => parameter.includes(key))
+            .reduce((obj, key) => {
+              return { ...obj, [key]: item[key] };
+            }, {});
+          if (isStringIn(keywords, itemFilteredByParameter))
+            itemFound.push(item);
         });
 
         this.setState({ itemFound });
@@ -69,17 +79,22 @@ export default class HomePage extends Component {
       })
       .then((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        window.open(`/home`, "_self");
       });
+  };
 
-    window.open(`/home`, "_self");
+  handleUpdateValue = (field) => {
+    console.log(field);
+    this.setState({ itemFilter: { parameter: field } });
   };
 
   render() {
-    const { keywords, itemFound } = this.state;
+    const { keywords, itemFound, itemFilter } = this.state;
     return (
       <div className="home page container">
         <h1 className="mb-5">Home page</h1>
-
         <div className="container w-50">
           <SearchComponent
             handleSubmit={this.handleSearchSubmit}
@@ -87,12 +102,20 @@ export default class HomePage extends Component {
             handleValidation={this.handleSearchValidation}
           />
         </div>
-        {itemFound.length > 0 && (
-          <SearchItemsComponent
-            data={itemFound}
-            handleItemBuy={this.handleItemBuy}
+        <div className="container my-5">
+          <SearchFilterComponent
+            updateValue={this.handleUpdateValue}
+            initialValues={itemFilter}
           />
-        )}
+        </div>
+        <div className="container my-5">
+          {itemFound.length > 0 && (
+            <SearchItemsComponent
+              data={itemFound}
+              handleItemBuy={this.handleItemBuy}
+            />
+          )}
+        </div>
       </div>
     );
   }
