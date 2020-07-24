@@ -14,7 +14,7 @@ yarn
 yarn start
 ```
 
-Terdapat beberapa fitur dalam projek ini
+There are several features in this project
 
 1. Authentication
 2. Items management
