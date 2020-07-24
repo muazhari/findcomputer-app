@@ -12,7 +12,6 @@ class SearchService {
 
   getAllItemWithUsername() {
     const { id, username, password } = AuthSession.handleGetUser();
-    console.log(this.apiURL);
     return Axios.get(`${this.apiURL}/items/with/username`);
   }
 

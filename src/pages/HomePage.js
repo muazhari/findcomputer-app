@@ -84,7 +84,6 @@ export default class HomePage extends Component {
   };
 
   handleUpdateValue = (field) => {
-    console.log(field);
     this.setState({ itemFilter: { parameter: field } });
   };
 
