@@ -1,3 +1,26 @@
+# findcomputer-app
+
+> Find Computer App for Compfest Task Project
+
+# Installation
+
+```
+yarn
+```
+
+# Usage
+
+```
+yarn start
+```
+
+Terdapat beberapa fitur dalam projek ini
+
+1. Authentication
+2. Items management
+3. Search items by specific parameter
+4. Profile management
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
