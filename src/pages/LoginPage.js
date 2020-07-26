@@ -59,14 +59,16 @@ class LoginPage extends Component {
     return (
       <div className="container">
         <h1 className="mb-5">Login Page</h1>
-        {isError && (
-          <div className="container alert alert-danger">
-            Invalid credentials
-          </div>
-        )}
+        <div className="container d-md-flex justify-content-center flex-md-column w-50">
+          {isError && (
+            <div className="container alert alert-danger">
+              Invalid credentials
+            </div>
+          )}
 
-        {isLoading && <div className="container alert alert-info">Loading</div>}
-        <div className="container d-md-flex justify-content-center w-50">
+          {isLoading && (
+            <div className="container alert alert-info">Loading</div>
+          )}
           <Formik
             initialValues={authValues}
             onSubmit={this.handleSubmit}

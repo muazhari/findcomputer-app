@@ -52,8 +52,10 @@ class RegisterPage extends Component {
       <div className="container">
         <h1 className="mb-5">Register Page</h1>
 
-        {isLoading && <div className="container alert alert-info">Loading</div>}
-        <div className="container d-md-flex justify-content-center w-50">
+        <div className="container d-md-flex justify-content-center flex-md-column w-50">
+          {isLoading && (
+            <div className="container alert alert-info">Loading</div>
+          )}
           <Formik
             initialValues={authValues}
             onSubmit={this.handleSubmit}
