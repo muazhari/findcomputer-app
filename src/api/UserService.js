@@ -6,22 +6,16 @@ class UserService {
   apiURL = process.env.REACT_APP_API_URL;
 
   getAll() {
-    const { id, username, password } = AuthSession.handleGetUser();
     return Axios.get(`${this.apiURL}/users/`);
   }
 
   getByUsername({ username }) {
-    // const { id, username, password } = AuthSession.handleGetUser();
     return Axios.get(`${this.apiURL}/users/${username}`);
   }
 
   update({ userToUpdate }) {
     const { username, email, password } = userToUpdate;
-    const {
-      id: currentId,
-      username: currentUsername,
-      password: currentPassword,
-    } = AuthSession.handleGetUser();
+    const { username: currentUsername } = AuthSession.handleGetUser();
 
     return Axios.put(`${this.apiURL}/users/${currentUsername}`, {
       username,

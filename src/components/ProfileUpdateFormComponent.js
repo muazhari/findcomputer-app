@@ -20,13 +20,13 @@ class ProfileUpdateFormComponent extends Component {
         >
           {(props) => (
             <Form>
-              <div className="container w-50 d-md-flex flex-md-column">
+              <div className="container d-md-flex flex-md-column">
                 <ErrorMessage
                   name="username"
                   component="div"
                   className="alert alert-warning"
                 />
-                <fieldset className="my-3">
+                <fieldset className="my-2">
                   <label htmlFor="username">Username</label>
                   <Field
                     id="username"
@@ -41,7 +41,7 @@ class ProfileUpdateFormComponent extends Component {
                   component="div"
                   className="alert alert-warning"
                 />
-                <fieldset className="my-3">
+                <fieldset className="my-2">
                   <label htmlFor="email">Email</label>
                   <Field
                     id="email"
@@ -55,7 +55,7 @@ class ProfileUpdateFormComponent extends Component {
                   component="div"
                   className="alert alert-warning"
                 />
-                <fieldset className="my-3">
+                <fieldset className="my-2">
                   <label htmlFor="password">Password</label>
                   <Field
                     id="password"

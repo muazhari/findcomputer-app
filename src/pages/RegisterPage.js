@@ -12,8 +12,7 @@ class RegisterPage extends Component {
   }
 
   handleSubmit = (val) => {
-    const { authValues } = val;
-    const { username, email, password } = authValues;
+    const { username, email, password } = val;
 
     this.setState({ isLoading: true });
     AuthService.handleRegister({ username, email, password })

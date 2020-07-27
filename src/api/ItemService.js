@@ -6,17 +6,17 @@ class ItemService {
   apiURL = process.env.REACT_APP_API_URL;
 
   getAll() {
-    const { id, username, password } = AuthSession.handleGetUser();
+    const { username } = AuthSession.handleGetUser();
     return Axios.get(`${this.apiURL}/users/${username}/items`);
   }
 
   getById({ itemId }) {
-    const { id, username, password } = AuthSession.handleGetUser();
+    const { username } = AuthSession.handleGetUser();
     return Axios.get(`${this.apiURL}/users/${username}/items/${itemId}`);
   }
 
   create({ itemToCreate }) {
-    const { id, username, password } = AuthSession.handleGetUser();
+    const { username } = AuthSession.handleGetUser();
     const { name, description, category, price } = itemToCreate;
     return Axios.post(`${this.apiURL}/users/${username}/items`, {
       name,
@@ -27,7 +27,7 @@ class ItemService {
   }
 
   updateById({ itemId, itemToUpdate }) {
-    const { id, username, password } = AuthSession.handleGetUser();
+    const { username } = AuthSession.handleGetUser();
     const { name, description, category, price } = itemToUpdate;
     return Axios.put(`${this.apiURL}/users/${username}/items/${itemId}`, {
       name,
@@ -38,7 +38,7 @@ class ItemService {
   }
 
   deleteById({ itemId }) {
-    const { id, username, password } = AuthSession.handleGetUser();
+    // const { id, username, password } = AuthSession.handleGetUser();
     // return Promise.all(
     //   Axios.delete(`${this.apiURL}/users/${username}/items/${itemId}`),
     //   Axios.delete(`${this.apiURL}/items/${itemId}`)

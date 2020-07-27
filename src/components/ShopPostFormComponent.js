@@ -11,7 +11,7 @@ class ShopPostFormComponent extends Component {
     const { initialValues, handleValidate, handleSubmit } = this.props;
 
     return (
-      <div className="container w-75">
+      <div className="container">
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}

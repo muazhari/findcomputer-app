@@ -1,5 +1,4 @@
 import Axios from "axios";
-import AuthSession from "../services/AuthSession";
 
 class AuthService {
   // apiURL = "http://localhost:3000/api/v1";

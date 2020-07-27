@@ -43,8 +43,6 @@ class RootRoute extends Component {
       <Router>
         <HeaderComponent />
         <Switch>
-          <AuthenticatedRoute path="/profile" component={ProfilePage} />
-
           <AuthenticatedRoute
             path="/shops/:username/items/:itemId"
             component={ShopUpdatePage}
@@ -53,15 +51,16 @@ class RootRoute extends Component {
             path="/shops/:username/items/"
             component={ShopPostPage}
           />
-
           <AuthenticatedRoute path="/shops/:username" component={ShopPage} />
-          <Route path="/logout" exact component={LogoutPage} />
 
-          <AuthenticatedRoute path="/home" component={HomePage} />
+          <AuthenticatedRoute path="/profile" component={ProfilePage} />
+
           <Route path="/auth/login" component={LoginPage} />
           <Route path="/auth/register" component={RegisterPage} />
           <Route path="/auth" component={AuthPage} />
+          <Route path="/logout" exact component={LogoutPage} />
 
+          <AuthenticatedRoute path="/home" component={HomePage} />
           <AuthenticatedRoute path="/" component={HomePage} />
           <Route path="" component={ErrorPage} />
         </Switch>

@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import { Formik, Form, Field } from "formik";
 import ItemService from "../api/ItemService";
 import { isStringIn } from "../tools/validations";
 import SearchService from "../api/SearchService";
 import SearchComponent from "../components/SearchComponent";
 import SearchItemsComponent from "../components/SearchItemsComponent";
 import SearchFilterComponent from "../components/SearchFilterComponent";
-
-import AuthSession from "../services/AuthSession";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -22,7 +19,7 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
-    const { keywords, itemFound } = this.state;
+    const { keywords } = this.state;
     this.handleSearchFetch(keywords);
   }
 
@@ -40,7 +37,6 @@ export default class HomePage extends Component {
   };
 
   handleSearchFetch = (keywords) => {
-    const { username: currentUsername } = AuthSession.handleGetUser();
     const { parameter } = this.state.itemFilter;
     SearchService.getAllItemWithUsername()
       .then((res) => {
@@ -69,7 +65,7 @@ export default class HomePage extends Component {
   };
 
   handleItemBuy = (itemId) => {
-    const { keywords, itemFound } = this.state;
+    const { keywords } = this.state;
     ItemService.deleteById({ itemId })
       .catch((res) => {
         console.log(res);
@@ -88,7 +84,7 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { keywords, itemFound, itemFilter } = this.state;
+    const { itemFound, itemFilter } = this.state;
     return (
       <div className="home page container">
         <h1 className="mb-5">Home page</h1>

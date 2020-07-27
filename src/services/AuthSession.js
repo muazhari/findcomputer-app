@@ -1,5 +1,3 @@
-import AuthService from "../api/AuthService";
-
 class AuthSession {
   handleLoginSucceed(credentials) {
     sessionStorage.setItem("authenticatedUser", JSON.stringify(credentials));

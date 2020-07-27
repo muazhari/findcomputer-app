@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
 import ItemService from "../api/ItemService";
 import AuthSession from "../services/AuthSession";
-import AuthService from "../api/AuthService";
 
 import ShopPostFormComponent from "../components/ShopPostFormComponent";
 
@@ -46,8 +44,6 @@ class ShopPostPage extends Component {
   };
 
   handleSubmit = (val) => {
-    const { username } = AuthSession.handleGetUser();
-    const { match } = this.props;
     const { name, description, category, price } = val;
     const itemToCreate = { name, description, category, price };
     this.setState({ isLoading: true });
@@ -66,7 +62,6 @@ class ShopPostPage extends Component {
   };
 
   handleItemDelete = () => {
-    const { username } = AuthSession.handleGetUser();
     const { match } = this.props;
 
     ItemService.deleteById({ itemId: match.params.itemId })
@@ -80,18 +75,21 @@ class ShopPostPage extends Component {
   };
 
   render() {
-    const { itemData, itemValues, isLoading } = this.state;
-    const { id, name, description, category, price } = itemValues;
+    const { itemValues, isLoading } = this.state;
     return (
       <div className="container">
         <h1 className="text-center mb-5">My Shop Post</h1>
 
-        {isLoading && <div className="container alert alert-info">Loading</div>}
-        <ShopPostFormComponent
-          initialValues={itemValues}
-          handleSubmit={this.handleSubmit}
-          handleValidate={this.handleValidate}
-        />
+        <div className="container w-75">
+          {isLoading && (
+            <div className="container alert alert-info">Loading</div>
+          )}
+          <ShopPostFormComponent
+            initialValues={itemValues}
+            handleSubmit={this.handleSubmit}
+            handleValidate={this.handleValidate}
+          />
+        </div>
       </div>
     );
   }

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
 import ItemService from "../api/ItemService";
 import AuthSession from "../services/AuthSession";
-import AuthService from "../api/AuthService";
 
 import ShopUpdateFormComponent from "../components/ShopUpdateFormComponent";
 import ShopUpdateItemComponent from "../components/ShopUpdateItemComponent";
@@ -47,11 +45,11 @@ class ShopUpdatePage extends Component {
   };
 
   handleSubmit = (val) => {
-    const { username } = AuthSession.handleGetUser();
     const { match } = this.props;
     const { name, description, category, price } = val;
     const itemToUpdate = { name, description, category, price };
     this.setState({ isLoading: true });
+
     ItemService.updateById({ itemId: match.params.itemId, itemToUpdate })
       .then((res) => {
         console.log(res);
@@ -67,7 +65,6 @@ class ShopUpdatePage extends Component {
   };
 
   handleDelete = () => {
-    const { username } = AuthSession.handleGetUser();
     const { match } = this.props;
 
     ItemService.deleteById({ itemId: match.params.itemId })
@@ -102,8 +99,7 @@ class ShopUpdatePage extends Component {
   };
 
   render() {
-    const { itemData, itemValues, isLoading } = this.state;
-    const { id, name, description, category, price } = itemValues;
+    const { itemValues, isLoading } = this.state;
     return (
       <div className="container">
         <h1 className="text-center mb-5">My Shop Update</h1>

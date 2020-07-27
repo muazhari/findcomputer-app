@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import ItemService from "../api/ItemService";
 import AuthSession from "../services/AuthSession";
-import AuthService from "../api/AuthService";
 
 import ProfileUpdateFormComponent from "../components/ProfileUpdateFormComponent";
 import ProfileUpdateItemComponent from "../components/ProfileUpdateItemComponent";
@@ -44,7 +41,6 @@ class ProfilePage extends Component {
   };
 
   handleSubmit = (val) => {
-    const { username: currentUsername } = AuthSession.handleGetUser();
     const { username, email, password } = val;
     const userToUpdate = { username, email, password };
 
@@ -83,8 +79,7 @@ class ProfilePage extends Component {
   };
 
   render() {
-    const { itemData, itemValues, error, isLoading } = this.state;
-    const { id, username, email, password } = itemValues;
+    const { itemValues, error, isLoading } = this.state;
     return (
       <div className="container">
         <h1 className="text-center mb-5">Profile Page</h1>
@@ -93,20 +88,21 @@ class ProfilePage extends Component {
           <ProfileUpdateItemComponent initialValues={itemValues} />
         </div>
 
-        {error && (
-          <div className="container alert alert-danger">
-            Invalid credentials
-          </div>
-        )}
-
-        {isLoading && <div className="container alert alert-info">Loading</div>}
-
-        <h2 className="text-center mb-3">Update Profile</h2>
-        <ProfileUpdateFormComponent
-          initialValues={itemValues}
-          handleSubmit={this.handleSubmit}
-          handleValidate={this.handleValidate}
-        />
+        <div className="container w-50 my-5">
+          {error && (
+            <div className="container alert alert-danger">
+              Invalid credentials
+            </div>
+          )}
+          {isLoading && (
+            <div className="container alert alert-info">Loading</div>
+          )}
+          <ProfileUpdateFormComponent
+            initialValues={itemValues}
+            handleSubmit={this.handleSubmit}
+            handleValidate={this.handleValidate}
+          />{" "}
+        </div>
       </div>
     );
   }

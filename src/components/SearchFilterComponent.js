@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { Formik, Field } from "formik";
 
-const capitalize = (s) => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
-
-const Checkbox = (props, children) => {
+const Checkbox = (props) => {
   return (
     <Field name={props.name}>
       {({ field, form }) => (
